@@ -92,7 +92,7 @@ stages:
                 environmentServiceName: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT))'
                 allowTelemetryCollection: false
-                publishPlanResults: '-out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                publishPlanResults: '-out $(Pipeline.Workspace)/terraform-manifests-artifact/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
 ## Step-5: Terraform Apply (Use the plan created in previous step)
             - task: TerraformCLI@0
               displayName: Terraform Apply
