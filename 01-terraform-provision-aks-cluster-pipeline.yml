@@ -90,9 +90,8 @@ stages:
                 command: 'plan'
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-artifact'
                 environmentServiceName: 'terraform-aks-azurerm-svc-con'
-                commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT)'# -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out
+                commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
-                publishPlanResults: '$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
 ## Step-5: Terraform Apply (Use the plan created in previous step)
             - task: TerraformCLI@0
               displayName: Terraform Apply
@@ -100,6 +99,5 @@ stages:
                 command: 'apply'
                 workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-artifact'
                 environmentServiceName: 'terraform-aks-azurerm-svc-con'
-                #commandOptions: '$(Pipeline.Workspace)/terraform-manifests-artifact/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-                commandOptions: '$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                commandOptions: '$(Pipeline.Workspace)/terraform-manifests-artifact/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
